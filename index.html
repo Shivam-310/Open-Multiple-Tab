@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Links in Multiple Tabs</title>
+  <script>
+    function openMultipleTabs() {
+      const link = document.getElementById("url").value;
+      const numTabs = document.getElementById("numTabs").value;
+
+      // Check if URL starts with http:// or https://
+      if (!link.startsWith('http://') && !link.startsWith('https://')) {
+        alert("Please enter a valid URL that starts with 'http://' or 'https://'.");
+        return;
+      }
+
+      for (let i = 0; i < numTabs; i++) {
+        let a = document.createElement("a");
+        a.href = link;
+        a.target = "_blank";
+        a.style.display = "none";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a); // Clean up the anchor element after the click
+      }
+    }
+  </script>
+</head>
+<body>
+  <h2>Open Link in Multiple Tabs</h2>
+  <label for="url">Enter URL:</label>
+  <input type="text" id="url" placeholder="https://example.com">
+  <br><br>
+  <label for="numTabs">Number of Tabs:</label>
+  <input type="number" id="numTabs" min="1" value="5">
+  <br><br>
+  <button onclick="openMultipleTabs()">Open in Tabs</button>
+</body>
+</html>
